@@ -20,7 +20,7 @@ class Errors(commands.Cog):
 
         if isinstance(error, commands.CheckFailure):
             await context.reply(
-                "You are not priveleged enough to use this command.",
+                "You are not privileged enough to use this command.",
                 mention_author=False
             )
 
