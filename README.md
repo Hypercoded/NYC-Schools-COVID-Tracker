@@ -17,5 +17,5 @@ We feel as if the provided website is lackluster and hard to check for a daily u
 
 # What programming lanugages/frameworks?
 
-We'll use [MongoDB] (https://www.mongodb.com/) for data storage. We're using [PyCord](https://github.com/Pycord-Development/pycord) as a framework for our discord bots. Twitter bot will use [Tweepy](https://www.tweepy.org/), and the website will run off [NextJS](https://nextjs.org/).
+We'll use [MongoDB](https://www.mongodb.com/) for data storage. We're using [PyCord](https://github.com/Pycord-Development/pycord) as a framework for our discord bots. Twitter bot will use [Tweepy](https://www.tweepy.org/), and the website will run off [NextJS](https://nextjs.org/).
 
