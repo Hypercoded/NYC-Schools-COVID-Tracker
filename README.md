@@ -5,7 +5,7 @@ This is a small project meant for the purpose of aggregating COVID data pulled f
 
 # How does it work?
 
-Every day we poll the COVID case data for numerous schools in the NYC region using a BS4 webscraper and the [School Health Report Card](https://schoolcovidreportcard.health.ny.gov/) provided by the state.
+Every day we poll the COVID case data for numerous schools in the NYC region on the [School Health Report Card](https://schoolcovidreportcard.health.ny.gov/) website, provided by the state.
 
 We also will have a Discord Bot and Twitter Account that you can  receive alerts from, allowing you to get the info as soon as possible.
 
@@ -17,5 +17,5 @@ We feel as if the provided website is lackluster and hard to check for a daily u
 
 # What programming lanugages/frameworks?
 
-For webscraping, the program will use [BeautifulSoup4](https://pypi.org/project/beautifulsoup4/) and [MongoDB] (https://www.mongodb.com/) for data storage. We're using [PyCord](https://github.com/Pycord-Development/pycord) as a framework for our discord bots. Twitter bot will use [Tweepy](https://www.tweepy.org/), and the website will run off [NextJS](https://nextjs.org/).
+We'll use [MongoDB](https://www.mongodb.com/) for data storage. We're using [PyCord](https://github.com/Pycord-Development/pycord) as a framework for our discord bots. Twitter bot will use [Tweepy](https://www.tweepy.org/), and the website will run off [NextJS](https://nextjs.org/).
 

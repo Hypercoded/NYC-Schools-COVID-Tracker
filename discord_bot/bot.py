@@ -1,65 +1,55 @@
+# discord api
 import discord
-import dotenv
-import os
 from discord.ext import commands
 from discord.ui import button
 from discord import Option
 
-dotenv.load_dotenv()
-intents = discord.Intents.all()
-client = commands.Bot(command_prefix="!", intents=intents)
+# .env configuration
+from dotenv import load_dotenv
+load_dotenv()
 
+# system
+import psutil
+import os
 
-@client.event
-async def on_ready():
-    print("bot is ready")
+# custom utilities and setup
+from Utilities import log
 
-# import embeds.py
-# message.send(embeds.all_time_stats(data, to, get, passed, in))
-# TODO: calvin and williams can u guys create an embeds file where all the embeds can live, and the function
-# TODO: will take in parameters for the values?
-# what parameters do you want to use
+log = log.Logger("client")
 
+# client runtime variable
+Token = os.getenv("CLIENT_TOKEN")
 
-@client.slash_command(guild_ids=[821868761329696769])
-async def test(ctx):
-    em1 = discord.Embed(title="Covid Stats", description="temp", color=discord.Color.teal())
+class Client(commands.AutoShardedBot):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
-    em1.add_field(
-        name="Total Number of Positive Cases",
-        value="temp, will set up when retrieving data is finished",
-        inline=False,
-    )
-    em1.add_field(
-        name="Total Number of Student Cases",
-        value="temp",
-        inline=False
-    )
-    em1.add_field(
-        name="Total Number of Teacher Cases",
-        value="temp",
-        inline=False
-    )
-    #TODO: staff & teacher cases are combined into faculty cases
-    em1.add_field(
-        name="Total Number of Staff Cases",
-        value="temp",
-        inline=False
-    )
-    em1.add_field(
-        name="New Cases in the Past Week",
-        value="temp",
-        inline=False
-    )
-    em1.add_field(
-        name="Positivity Rate",
-        value="temp",
-        inline=False
-    )
-    em1.add_field(
-        name="what else are we adding",
-        value="temp",
-        inline=False
-    )
-    await ctx.send(embed=em1)
-client.run(os.environ.get('token'))
+        # client version
+        self.Version = "0.1.0"
+
+        # operational level variables
+        self.Updating = False
+        self.Debugging = False
+        self.Maintaining = False
+
+        # psutil utilization
+        self.process = psutil.Process(os.getpid())
+
+    @commands.Cog.listener()
+    async def on_ready(self):
+        await log.info(f"{self.user} is online.")
+
+# calling and initializing the client
+client = Client(
+    commands.when_mentioned_or("."),
+    intents=discord.Intents.all(),
+    case_insensitive=True,
+    help_command=None
+)
+
+# Load cogs
+for filename in os.listdir("./Cogs"):
+    if filename.endswith(".py"):
+        client.load_extension(f"Cogs.{filename[:-3]}")
+
+client.run(Token, reconnect=True)
