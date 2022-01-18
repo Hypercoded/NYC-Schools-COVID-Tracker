@@ -1,0 +1,95 @@
+{
+    "school_name": "",
+    "school_id": "",
+
+    "district_name": "",
+    "district_id": "",
+
+    "total_students": 0,
+    "total_faculty": 0,
+    "total_population": 0,
+
+    "geography": {
+        "zip": "",
+        "address": "",
+        "city": ""
+    },
+
+    "covid_report": {
+        "last_updated": 0,
+        "total": {
+            "change": {
+                "cases": {
+                    "total": 0,
+                    "students": 0,
+                    "faculty": 0
+                },
+                "percentage": {
+                    "total": 0.0,
+                    "students": 0.0,
+                    "faculty": 0.0
+                }
+
+            },
+
+            "cases": {
+                "total": 0,
+                "student": 0,
+                "faculty": 0
+            },
+            "percentage_infected": {
+                "total": 0.0,
+                "student": 0.0,
+                "faculty": 0.0
+            }
+        },
+        "today": {
+            "cases": {
+                "total": 0,
+                "student": 0,
+                "faculty": 0
+            },
+            "percentage_infected": {
+                "total": 0.0,
+                "student": 0.0,
+                "faculty": 0.0
+            }
+        },
+        "yesterday": {
+            "cases": {
+                "total": 0,
+                "student": 0,
+                "faculty": 0
+            },
+            "percentage_infected": {
+                "total": 0.0,
+                "student": 0.0,
+                "faculty": 0.0
+            }
+        },
+        "this_week": {
+            "cases": {
+                "total": 0,
+                "student": 0,
+                "faculty": 0
+            },
+            "percentage_infected": {
+                "total": 0,
+                "student": 0,
+                "faculty": 0
+            }
+        },
+        "last_week": {
+            "cases": {
+                "total": 0,
+                "student": 0,
+                "faculty": 0
+            },
+            "percentage_infected": {
+                "total": 0.0,
+                "student": 0.0,
+                "faculty": 0.0
+            }
+        }
+    }
+}

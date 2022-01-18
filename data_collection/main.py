@@ -1,19 +1,10 @@
 # Structure
-import os
+import requests
+from pymongo import MongoClient
+
+from data_collection.data_loading import load_schools, load_districts
 
 
-# Open MongoDB
-# Setup db
-
-
-# get every school in the state's district and id pair
-
-
-# get every schools' essential covid data
-
-
-# upload to db along with generating a few basic reports
-
-# pray that the runtime isnt too slow.
-
+## if you're looking for code too bad i moved it all to data_loading.py and now someone has to go write
+# some real code here ggg
 
