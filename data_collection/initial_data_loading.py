@@ -6,7 +6,7 @@ import requests
 
 PUBLIC_DIRECTORY = "https://schoolcovidreportcard.health.ny.gov/data/directory/public.directory.abbreviated.json"
 
-connectionString = "not-a-real-connection-string"
+connectionString = "no"
 
 # Connect to MongoDB
 client = MongoClient(connectionString)
@@ -58,7 +58,7 @@ def load_schools():
                 res.append(newSchool)
                 print("School: (" + name + ") added to database.")
             except:
-                print("Error loading school: " + name)
+                print("School: (" + name + ") failed to add to database.")
 
 
 
@@ -156,22 +156,23 @@ def create_normal_historical_report(rawData, limit=None):
             newDatapoint = datapointTemplate.copy()
             date = caseHistory["date"]
 
-            datetimeFailed = False
-
             date = date.replace(",", "")
 
             try:
                 strdate = ", ".join(date.split(" ")[:3])
                 date = datetime.datetime.strptime(strdate, "%b, %d, %Y")
+                formattedDate = date.strftime("%m-%d-%y")
             except:
                 date = datetime.datetime.now()
                 datetimeFailed = True
                 print("Failed to parse date: " + date)
+                formattedDate = date.strftime("%m-%d-%y")
 
             # screeningHistory = rawData["totalScreeningTests"][date]
+
+
             dataMap = {
-                "date": date,
-                "timestamp": datetime.datetime.now(),
+                "timestamp": date,
 
                 "population": rawData["currentCounts"]["totalEnrolled"],
                 "positiveCount": caseHistory["positiveCount"],
@@ -186,7 +187,7 @@ def create_normal_historical_report(rawData, limit=None):
 
             for key, data in dataMap.items():
                 newDatapoint[key] = data
-            results[strdate] = newDatapoint
+            results[formattedDate] = newDatapoint
         return results
 
 
@@ -205,15 +206,15 @@ def create_hybrid_historical_report(rawData, limit=None):
             try:
                 strdate = ", ".join(date.split(" ")[:3])
                 date = datetime.datetime.strptime(strdate, "%b, %d, %Y")
-                print(date)
+                formattedDate = date.strftime("%m-%d-%y")
             except:
                 date = datetime.datetime.now()
                 datetimeFailed = True
                 print("Failed to parse date: " + date)
+                formattedDate = date.strftime("%m-%d-%y")
 
             dataMap = {
-                "date": caseHistory["date"],
-                "ts": datetime.datetime.now(),
+                "timestamp": date,
 
                 "population": int(rawData["currentCounts"]["onSiteTotalPopulation"]) + int(
                     rawData["currentCounts"]["offSiteTotalPopulation"]),
@@ -233,7 +234,7 @@ def create_hybrid_historical_report(rawData, limit=None):
 
             for key, data in dataMap.items():
                 newDatapoint[key] = data
-            results[date] = newDatapoint
+            results[formattedDate] = newDatapoint
         return results
 
 
@@ -251,3 +252,7 @@ def load_districts():
                     f"https://schoolcovidreportcard.health.ny.gov/data/public/district.{v['districtBedsCode']}.json").json()))
 
     return districtsList
+
+load_schools()
+
+load_districts()
