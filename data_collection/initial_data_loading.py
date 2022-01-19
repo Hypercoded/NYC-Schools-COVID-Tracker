@@ -82,6 +82,7 @@ def create_normal_school(schoolJSON, rawData):
         "total_population": int(rawData["studentEnrolled"]) + int(rawData["teacherEnrolled"]) + int(
             rawData["staffEnrolled"]),
 
+
     }
 
     for key, data in dataMap.items():
