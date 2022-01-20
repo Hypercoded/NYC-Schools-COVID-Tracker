@@ -60,6 +60,6 @@ async def test2(ctx):
     )
     await ctx.respond(embed=em)
 
-
+d
 
 client.run(os.getenv("TOKEN"))
