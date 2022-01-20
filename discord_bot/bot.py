@@ -16,11 +16,11 @@ client = commands.Bot(command_prefix="!", intents=intents)
 async def on_ready():
     print("bot is ready")
 
-@client.slash_command()
+@client.slash_command(guild_ids=[821868761329696769])
 async def test(ctx):
     await ctx.respond("test")
 
-@client.slash_command()
+@client.slash_command(guild_ids=[821868761329696769])
 async def test2(ctx):
     em = discord.Embed(title="Covid Stats", description="temp", color=discord.Color.teal())
     em.add_field(
