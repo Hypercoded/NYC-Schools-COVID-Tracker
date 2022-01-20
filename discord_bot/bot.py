@@ -59,7 +59,6 @@ async def test2(ctx):
         inline = False
     )
     await ctx.respond(embed=em)
-
-d
+    await ctx.send(ctx.author.mention)
 
 client.run(os.getenv("TOKEN"))
