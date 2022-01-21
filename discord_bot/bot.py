@@ -7,49 +7,58 @@ from discord import Option
 # .env configuration
 from dotenv import load_dotenv
 load_dotenv()
-
-# system
-import psutil
 import os
 
-# custom utilities and setup
-from Utilities import log
+intents = discord.Intents.all()
+client = commands.Bot(command_prefix="!", intents=intents)
 
-log = log.Logger("client")
+@client.event
+async def on_ready():
+    print("bot is ready")
 
-# client runtime variable
-Token = os.getenv("CLIENT_TOKEN")
+@client.slash_command(guild_ids=[821868761329696769])
+async def test(ctx):
+    await ctx.respond("test")
 
-class Client(commands.AutoShardedBot):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+@client.slash_command(guild_ids=[821868761329696769])
+async def test2(ctx):
+    em = discord.Embed(title="Covid Stats", description="temp", color=discord.Color.teal())
+    em.add_field(
+        name="Total Number of Positive Cases", 
+        value="temp",
+        inline = False
+    )
+    em.add_field(
+        name="Total Number of Student Cases", 
+        value="temp",
+        inline = False
+    )
+    em.add_field(
+        name="Total Number of Teacher Cases", 
+        value="temp",
+        inline = False
+    )
+    em.add_field(
+        name="Total Number of Staff Cases", 
+        value="temp",
+        inline = False
+    )
+    em.add_field(
+        name="New Cases in the Past Week", 
+        value="temp",
+        inline = False
+    )
+    em.add_field(
+        name="Positivity Rate", 
+        value="temp",
+        inline = False
+    )
+    em.add_field(
+        name="temp", 
+        value="temp",
+        inline = False
+    )
+    await ctx.respond(embed=em)
+    await ctx.send(ctx.author.mention)
 
-        # client version
-        self.Version = "0.1.0"
-
-        # operational level variables
-        self.Updating = False
-        self.Debugging = False
-        self.Maintaining = False
-
-        # psutil utilization
-        self.process = psutil.Process(os.getpid())
-
-    @commands.Cog.listener()
-    async def on_ready(self):
-        await log.info(f"{self.user} is online.")
-
-# calling and initializing the client
-client = Client(
-    commands.when_mentioned_or("."),
-    intents=discord.Intents.all(),
-    case_insensitive=True,
-    help_command=None
-)
-
-# Load cogs
-for filename in os.listdir("./Cogs"):
-    if filename.endswith(".py"):
-        client.load_extension(f"Cogs.{filename[:-3]}")
-
-client.run(Token, reconnect=True)
+client.run(os.getenv("TOKEN"))
