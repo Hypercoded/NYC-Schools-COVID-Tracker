@@ -91,5 +91,16 @@
                 "faculty": 0.0
             }
         }
+    },
+
+    "dataSourceDate": "",
+
+    "popularity": {
+
+        "discord_command_usage": 0,
+        "cum_member_count": 0,
+        "cum_server_count": 0,
+        "cum_ping_subscribed": 0,
+
     }
 }
